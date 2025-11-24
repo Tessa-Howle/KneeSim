@@ -59,31 +59,40 @@ void setup()
     int numsteps_FE = 0;
     int numsteps_IE = 0;
     int numsteps_VV = 0;
-    
+
+    stepper1.run();
+    stepper2.run();
+    stepper3.run();
+    stepper4.run();
+    stepper5.run();
+    stepper6.run();
+ 
     while(home_position == false) {
+    if (Serial.available()) {
     if ( x_home == false ) { // Working under the assumption that the limit switch will return a value of either 0 or 1
     numsteps_x = numsteps_x - 1; // Signed negative for reverse motion - may need to be positive depending on position of limit switches
-    stepper5.runToNewPosition(MICROSTEPPING*numsteps_x); 
+    stepper5.moveToNewPosition(MICROSTEPPING*numsteps_x); 
     }
     
     if (y_home == false ) {
     numsteps_y = numsteps_y - 1; 
-    stepper6.runToNewPosition(MICROSTEPPING*numsteps_y); 
+    stepper6.moveToNewPosition(MICROSTEPPING*numsteps_y); 
     }
 
     if ( FE_home == false ) {
     numsteps_FE = numsteps_FE - 1; 
-    stepper1.runToNewPosition(MICROSTEPPING*numsteps_FE); 
+    stepper1.moveToNewPosition(MICROSTEPPING*numsteps_FE); 
     } 
 
     if ( IE_home == false ) {
     numsteps_IE = numsteps_IE - 1;
-    stepper2.runToNewPosition(MICROSTEPPING*numsteps_IE); 
+    stepper2.moveToNewPosition(MICROSTEPPING*numsteps_IE); 
     }
 
     if ( VV_home == false ) {
     numsteps_VV = numsteps_VV - 1; 
-    stepper3.runToNewPosition(MICROSTEPPING*numsteps_VV); 
+    stepper3.moveToNewPosition(MICROSTEPPING*numsteps_VV); 
+    }
     }
     numsteps_x = 0; 
     numsteps_y = 0; 
